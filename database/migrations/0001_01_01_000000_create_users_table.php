@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role',['customer','supplier','admin'])->default('customer');
+            $table->decimal('balance', 10, 2)->default(0.00);
+            $table->string('room_number')->nullable();
+            $table->string('building')->nullable();
+            $table->boolean('is_banned')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
