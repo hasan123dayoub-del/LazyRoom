@@ -73,16 +73,54 @@ class OrderController extends Controller
     /** Get all orders that contain products belonging to the current supplier. */
     public function supplierIndex()
     {
-        $user = Auth::user();
+        $supplierId = Auth::id();
 
-        $orders = Order::whereHas('items.product', function ($query) use ($user) {
-            $query->where('supplier_id', $user->id);
-        })->with(['items.product' => function ($query) use ($user) {
-            $query->where('supplier_id', $user->id);
-        }, 'customer:id,name'])->latest()->get();
+        $orders = Order::whereHas('items.product', function ($query) use ($supplierId) {
+            $query->where('supplier_id', $supplierId);
+        })
+            ->with([
+                'customer:id,name,building,room_number',
+                'items' => function ($query) use ($supplierId) {
+                    $query->whereHas('product', function ($q) use ($supplierId) {
+                        $q->where('supplier_id', $supplierId);
+                    })->with('product');
+                }
+            ])
+            ->latest()
+            ->get()
+            ->map(function ($order) {
+                $customerName = $order->customer ? $order->customer->name : 'Unknown Customer';
+                $building = $order->customer ? $order->customer->building : 'N/A';
+                $roomNumber = $order->customer ? $order->customer->room_number : 'N/A';
+
+                return [
+                    'order_id' => $order->id,
+                    'state' => $order->state,
+                    'customer_name' => $customerName,
+                    'delivery_address' => [
+                        'building' => $building,
+                        'room_number' => $roomNumber
+                    ],
+                    'created_at' => $order->created_at,
+
+                    'my_products_total' => (float) $order->items->sum(function ($item) {
+                        return $item->price * $item->quantity;
+                    }),
+
+                    'items' => $order->items->map(function ($item) {
+                        return [
+                            'product_name' => $item->product ? $item->product->name : 'Product Deleted',
+                            'quantity' => $item->quantity,
+                            'price' => (float) $item->price,
+                            'subtotal' => (float) ($item->price * $item->quantity)
+                        ];
+                    })
+                ];
+            });
 
         return response()->json([
             "status" => "success",
+            "message" => "Customer orders retrieved successfully for this supplier",
             "orders" => $orders
         ], 200);
     }
