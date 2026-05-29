@@ -60,4 +60,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'customer_id');
     }
+    public function scopeSuppliers($query)
+    {
+        return $query->where('role', 'supplier');
+    }
+
+    public function scopeCustomers($query)
+    {
+        return $query->where('role', 'customer');
+    }
 }
