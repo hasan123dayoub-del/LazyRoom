@@ -28,7 +28,7 @@ class AdminController extends Controller
         $type = $request->query('type');
 
         $users = User::where('role', $type)
-            ->select('id', 'name', 'email', 'role', 'balance', 'created_at')
+            ->select('id', 'name', 'email', 'role', 'balance', 'created_at','is_banned')
             ->get();
 
         return response()->json([
