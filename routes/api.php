@@ -16,6 +16,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('balance', [OrderController::class, 'showBalance']);
 
     Route::post('/logout', [UserController::class, 'logout']);
     Route::delete('/delete-account', [UserController::class, 'deleteAccount']);

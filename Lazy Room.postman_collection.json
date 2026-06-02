@@ -69,7 +69,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n      \"email\": \"supplier@example.com\",\n      \"password\": \"password123\"\n}",
+              "raw": "{\n    \"email\": \"supplier@example.com\",\n    \"password\": \"password123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -303,7 +303,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "4|cbO5HYU7EwhDoZlSTT9nmyP0SkGjKr7yesypy3Tu38bffa12",
+                  "value": "7|6Mlh3JdtbMj91hR19KGFIkg0j0oXizt2kCiEGU0P0a8ccd7b",
                   "type": "string"
                 }
               ]
@@ -326,7 +326,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"New Vendor\",\n    \"email\": \"vendor41@gmail.com\",\n    \"password\": \"password123\",\n    \"role\": \"customer\",\n    \"room_number\": \"33\",\n    \"building\": \"14\",\n    \"balance\": 1000\n}",
+              "raw": "{\n    \"name\": \"New Vendor\",\n    \"email\": \"vendor42@gmail.com\",\n    \"password\": \"password123\",\n    \"role\": \"supplier\",\n    \"room_number\": \"33\",\n    \"building\": \"14\",\n    \"balance\": 1000\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -550,7 +550,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "6|mCHGZn9Y1NH2Y2COqKG6ldyhc15rATGmYHmma4XE041421c4",
+                  "value": "32|AMTlyowVdMwCa0XjDiSUqT1xDuze45Wf2xBLViQx53489f37",
                   "type": "string"
                 }
               ]
@@ -575,7 +575,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"customer_id\": 5,\r\n    \"amount\": 50.00\r\n}"
+              "raw": "{\r\n    \"customer_id\": 3,\r\n    \"amount\": 50.00\r\n}"
             },
             "url": {
               "raw": "http://127.0.0.1:8000/api/deposit",
@@ -611,7 +611,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "8|tHoWe9UGVBlW631KZp7VJLsxg60bUBnFkoJgJIKQ9dad717a",
+                  "value": "11|nvmxKO7jQvQcsZQiMzmxkpPgT6KUiX1jQJS7Nxkd81b6040b",
                   "type": "string"
                 }
               ]
@@ -706,7 +706,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "2|mEYd35hw4A9QQtWuq9P6jmRacNnYK8zM84suhRBn78a33f9b",
+                  "value": "10|NeZG0bf10nBfJCUC3qQcRc3kEqm5Go5uQUEav3Xo8046bfec",
                   "type": "string"
                 }
               ]
@@ -724,7 +724,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Juice\",\n    \"price\": 1.20,\n    \"description\":\"واحد لتر\",\n    \"stock\": 100,\n    \"category_id\": 2\n}",
+              "raw": "{\n    \"name\": \"Juice2\",\n    \"price\": 1.20,\n    \"description\":\"واحد لتر\",\n    \"stock\": 100,\n    \"category_id\": 2\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -857,7 +857,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "10|TRdxFNPTZ5bg4VwYBeTaE29DGkZCsKEYalZ5qIZMddb2b1db",
+                  "value": "13|kuRFiLiG8vdwLZNfM0NbtVBSaWZVd2JPnsWan9nMf2a665e6",
                   "type": "string"
                 }
               ]
@@ -899,7 +899,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "3|JisybpWYXhVWPkR5n9iN1fcwIdwANiWDYRzzrXfg76ddb412",
+                  "value": "33|2uI1nENCs3orJyaThdNB6KRvIMQW6Cu6t5eBraYK714b1c60",
                   "type": "string"
                 }
               ]
@@ -950,7 +950,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "3|JisybpWYXhVWPkR5n9iN1fcwIdwANiWDYRzzrXfg76ddb412",
+                  "value": "29|mDLNUCJQkf3iPhMuqOSnmuEbW9bo53QWl8Qt0OfXdb4d4339",
                   "type": "string"
                 }
               ]
@@ -974,7 +974,7 @@
               }
             ],
             "url": {
-              "raw": "http://127.0.0.1:8000/api/orders/1/complete",
+              "raw": "http://127.0.0.1:8000/api/orders/9/complete",
               "protocol": "http",
               "host": [
                 "127",
@@ -986,7 +986,7 @@
               "path": [
                 "api",
                 "orders",
-                "1",
+                "9",
                 "complete"
               ]
             }
@@ -1045,7 +1045,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "11|ojfKip4Q3yKYoMHwU0gPI4x07qGyS11ghL35HuNQ08374908",
+                  "value": "5|Rph0Wpid2IhjysOCSaQx2vayiM1wtnExjYi0YYY124cd10a4",
                   "type": "string"
                 }
               ]
@@ -1088,7 +1088,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "4|ktxL5KYlAo1NAA9pywwlKO6hSH0eQB3LcUq2EDXh17c4aa9b",
+                  "value": "34|XlyvKlbg5hvUyILHZYHrJWuNxLOQQdbEZiq1PRIC681c16f1",
                   "type": "string"
                 }
               ]
@@ -1102,10 +1102,15 @@
               {
                 "key": "Authorization",
                 "value": "Bearer {{your_sanctum_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
               }
             ],
             "url": {
-              "raw": "http://127.0.0.1:8000/api/orders/1/accept",
+              "raw": "http://127.0.0.1:8000/api/orders/9/accept",
               "protocol": "http",
               "host": [
                 "127",
@@ -1117,7 +1122,7 @@
               "path": [
                 "api",
                 "orders",
-                "1",
+                "9",
                 "accept"
               ]
             }
@@ -1163,6 +1168,55 @@
                 "orders",
                 "2",
                 "reject"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Balance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "31|ZKN6heSYIhxwCiOyR4P5vSYceBnTUYe3Cpii3DKife4abb3c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{your_sanctum_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/balance",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "balance"
               ]
             }
           },

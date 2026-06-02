@@ -57,13 +57,41 @@ class OrderController extends Controller
     /** Mark an accepted order as complete (finalized). */
     public function complete($id)
     {
-        $order = Order::with('items.product')->where('id', $id)->where('customer_id', Auth::id())->firstOrFail();
-        if ($order->state !== 'accept') return response()->json(['message' => 'Not accepted yet'], 400);
+        $order = Order::with(['items.product'])->where('id', $id)->where('customer_id', Auth::id())->first();
+
+        if (!$order) {
+            return response()->json(['message' => 'Order not found or unauthorized'], 404);
+        }
+
+        if ($order->state !== 'accept') {
+            return response()->json(['message' => 'Not accepted yet'], 400);
+        }
+
+        $supplierId = $order->items->first()->product->supplier_id;
 
         DB::beginTransaction();
-        $order->update(['state' => 'complete']);
-        DB::commit();
-        return response()->json(['message' => 'Order completed']);
+        try {
+            $customer = User::where('id', $order->customer_id)->lockForUpdate()->first();
+
+            if (!$customer) {
+                throw new \Exception("Customer with ID {$order->customer_id} not found in database.");
+            }
+
+            if ($customer->balance < $order->total_price) {
+                DB::rollBack();
+                return response()->json(['message' => 'Insufficient balance. Current: ' . $customer->balance], 400);
+            }
+
+            $customer->decrement('balance', $order->total_price);
+            User::where('id', $supplierId)->increment('balance', $order->total_price);
+            $order->update(['state' => 'complete']);
+
+            DB::commit();
+            return response()->json(['message' => 'Order completed successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+        }
     }
     /** Get all orders placed by the currently authenticated customer. */
     public function myOrders()
@@ -140,21 +168,9 @@ class OrderController extends Controller
                 return response()->json(["status" => "error", "message" => "Unauthorized."], 403);
             }
         }
+        $order->update(['state' => 'accept']);
 
-        DB::beginTransaction();
-        try {
-            User::where('id', $order->customer_id)->decrement('balance', $order->total_price);
-
-            User::where('id', $user->id)->increment('balance', $order->total_price);
-
-            $order->update(['state' => 'accept']);
-
-            DB::commit();
-            return response()->json(["status" => "success", "message" => "Order accepted."]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(["status" => "error", "message" => "Server error: " . $e->getMessage()], 500);
-        }
+        return response()->json(["status" => "success", "message" => "Order accepted."]);
     }
 
     /** Reject a pending order and return items to stock. */
@@ -186,5 +202,15 @@ class OrderController extends Controller
             DB::rollBack();
             return response()->json(["status" => "error", "message" => "Server error."], 500);
         }
+    }
+    public function showBalance()
+    {
+        $user = Auth::user();
+
+        return response()->json([
+            "status" => "success",
+            "balance" => (float) $user->balance,
+            "currency" => "USD"
+        ], 200);
     }
 }
