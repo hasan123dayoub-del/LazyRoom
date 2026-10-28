@@ -71,6 +71,14 @@ class OrderController extends Controller
 
         DB::beginTransaction();
         try {
+            // Lock the order row and re-check its state inside the transaction: concurrent requests for the
+            // same order wait here, and only the first one still sees 'accept', so the order is charged once.
+            $lockedOrder = Order::whereKey($order->id)->lockForUpdate()->first();
+            if ($lockedOrder->state !== 'accept') {
+                DB::rollBack();
+                return response()->json(['message' => 'Order already completed or no longer accepted'], 409);
+            }
+
             $customer = User::where('id', $order->customer_id)->lockForUpdate()->first();
 
             if (!$customer) {

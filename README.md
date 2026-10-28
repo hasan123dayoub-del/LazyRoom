@@ -40,6 +40,18 @@ LazyRoom is a RESTful backend for a multi-vendor marketplace where **customers**
 
 ---
 
+### Measured: concurrent wallet payments
+
+Parallel `complete` requests against MySQL (InnoDB), each from a separate PHP process, all released at the same moment ([`benchmarks/concurrency`](benchmarks/concurrency)). Order price 60.
+
+| Scenario | Before (customer row locked only) | After (order row locked and re-checked) |
+|---|---|---|
+| Same order, 20 parallel requests, balance 1000 | Charged **16 times** (960 taken) | Charged **once**, 19 requests get `409` (3 runs) |
+| 10 different orders, balance covers 1 | 1 charged, balance never negative | Same |
+| 5 orders x 10 requests (50 total), balance covers 2 | Not run | **2 charged**, balance ends at 0, never negative |
+
+The fix locks the order row inside the transaction and re-checks that it is still `accept` before touching the wallet, so duplicate requests for one order wait and then fail instead of charging again.
+
 ## 🛠 Tech Stack
 
 | Layer | Technology |
