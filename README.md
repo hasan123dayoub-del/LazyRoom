@@ -158,3 +158,7 @@ The API is available at **http://127.0.0.1:8000/api**.
 ## 👥 Team
 
 Built as a team project — backend API with Laravel.
+
+## 🙋 My contribution (Hasan Dayoub)
+
+The project was assigned to a team, and I developed the entire backend API myself, working directly on the `main` branch. That covers the customer, supplier and admin roles, the order state machine, the wallet with payments protected by database transactions and row locking (pessimistic locking) against double charges, and the admin module.
