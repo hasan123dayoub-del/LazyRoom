@@ -2,6 +2,7 @@
 
 LazyRoom is a RESTful backend for a multi-vendor marketplace where **customers** order food and grocery products from **suppliers**, payments are settled through an in-app **wallet**, and **admins** manage accounts and balances.
 
+[![tests](https://github.com/hasan123dayoub-del/LazyRoom/actions/workflows/tests.yml/badge.svg)](https://github.com/hasan123dayoub-del/LazyRoom/actions/workflows/tests.yml)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)
 ![Sanctum](https://img.shields.io/badge/Auth-Sanctum-FF2D20)
