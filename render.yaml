@@ -1,0 +1,8 @@
+# Render Blueprint: free Docker web service for the LazyRoom demo API.
+services:
+  - type: web
+    name: lazyroom-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /up
+    autoDeploy: true

@@ -39,8 +39,11 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
+        // The @example values pre-fill the request in the API docs with a demo account.
         $request->validate([
+            /** @example customer@lazyroom.com */
             'email' => 'required|email',
+            /** @example password */
             'password' => 'required'
         ]);
 

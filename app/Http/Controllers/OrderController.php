@@ -15,6 +15,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            /**
+             * Products from one supplier (the supplier accepts the whole order).
+             * @example [{"product_id": 1, "quantity": 2}, {"product_id": 4, "quantity": 1}]
+             */
             'items' => 'required|array',
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|integer|min:1',
@@ -64,7 +68,7 @@ class OrderController extends Controller
         }
 
         if ($order->state !== 'accept') {
-            return response()->json(['message' => 'Not accepted yet'], 400);
+            return response()->json(['message' => "Only accepted orders can be completed (this order is {$order->state})."], 400);
         }
 
         $supplierId = $order->items->first()->product->supplier_id;
