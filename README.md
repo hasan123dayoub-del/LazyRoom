@@ -10,13 +10,13 @@ LazyRoom is a RESTful backend for a multi-vendor marketplace where **customers**
 
 ## 🌐 Live demo
 
-**API base URL:** https://lazyroom-api.onrender.com
+**API base URL:** https://lazyroom-hasan.vercel.app
 
-- **Interactive API docs (try every endpoint in the browser):** https://lazyroom-api.onrender.com/docs/api, generated from the code with [Scramble](https://scramble.dedoc.co). The login and order requests are pre-filled with working demo values.
+- **Interactive API docs (try every endpoint in the browser):** https://lazyroom-hasan.vercel.app/docs/api, generated from the code with [Scramble](https://scramble.dedoc.co). The login and order requests are pre-filled with working demo values.
 - Demo accounts (password `password` for all): customer `customer@lazyroom.com` (wallet 100 USD), supplier `supplier@lazyroom.com` (products 1–4), admin `admin@lazyroom.com`. A second supplier, `fresh@lazyroom.com`, owns products 5–8.
 - Try the order flow: log in as the customer → `POST /api/orders` → log in as the supplier → `POST /api/orders/{id}/accept` → log in as the customer → `POST /api/orders/{id}/complete` and check `GET /api/balance`.
 - The mobile app was built by a teammate in Flutter; this repository is the backend.
-- Hosted on Render's free tier with SQLite: the first request after a period of inactivity can take about a minute, and the demo data resets on every restart. SQLite has no row locks, so the concurrency results below were measured on MySQL.
+- Hosted on Vercel (PHP runtime) with a Neon PostgreSQL database in Frankfurt, which has real row locks like MySQL. The demo data is reset on every deploy and every night.
 
 ---
 

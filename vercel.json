@@ -1,0 +1,55 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo \"PHP packages are installed by the vercel-php runtime\"",
+  "buildCommand": "echo \"The demo pages need no frontend build\"",
+  "outputDirectory": "public",
+  "regions": [
+    "fra1"
+  ],
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.8.0",
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "^/$",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/.*\\.php$",
+      "dest": "/api/index.php"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/demo/reset",
+      "schedule": "0 3 * * *"
+    }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "VIEW_COMPILED_PATH": "/tmp/views",
+    "CACHE_STORE": "array",
+    "SESSION_DRIVER": "array",
+    "QUEUE_CONNECTION": "sync",
+    "LOG_CHANNEL": "stderr",
+    "MAIL_MAILER": "log",
+    "DB_CONNECTION": "pgsql"
+  }
+}

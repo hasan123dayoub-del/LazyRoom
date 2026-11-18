@@ -76,7 +76,7 @@
         <div class="card"><b>Documented</b>OpenAPI docs generated from the code, plus a Postman collection.</div>
     </div>
 
-    <p class="note">Free hosting: the server sleeps when idle, so the first request can take up to a minute. This demo runs on SQLite, which has no row locks; the concurrency results above were measured on MySQL. The demo database is reset on every restart.</p>
+    <p class="note">Hosted on Vercel with a PostgreSQL database, so row locking is real here too. The demo data is reset every night, so feel free to place and complete orders.</p>
 
     <footer>Built by <a href="https://hasan123dayoub-del.github.io/portfolio/">Hasan Dayoub</a>.</footer>
 </main>
